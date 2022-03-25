@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-6 login-left">
                     <h2>Login here</h2>
-                    <form action="validation.php" method="POST">
+                    <form action="validation.php" onsubmit="return validate()" method="POST">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" name="user" class="form-control" requied>
@@ -29,13 +29,14 @@
                             <label for="password">Password</label>
                             <input type="password" name="password" class="form-control" requied>
                             <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="reset" class="btn btn-primary">Reset</button>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-6 login-right">
                     <h2>Register here</h2>
                     <form id="account-form" action="registration.php" 
-                    onsubmit="return validate()" method="POST">
+                    onsubmit="return register()" method="POST">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" id="username" name="user" 
@@ -56,15 +57,18 @@
                             <div id="alert"></div>
                             
                         </div>
-                        <button type="submit"
-                        class="btn btn-primary">Register</button>
+                        <div class="buttons">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="reset" class="btn btn-primary">Reset</button>
+                        </div>
+                        
                     </form>
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-         function validate() {
+            function register() {
                 var name = document.getElementById("username").value;
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("confirmPassword").value;
@@ -89,11 +93,29 @@
                 }
     
                 if(password != confirmPassword) {
-                    window.alert("Confirm password is WRONG")
+                    window.alert("Passwords do not match.")
                     return false
                 } else {
                     return true;
                 }                
+            }
+
+            function validate() {
+                var name = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+
+                if (name.value == "") {
+                    window.alert("Please enter your name.");
+                    name.focus();
+                    return false;
+                } else if (password.value == "") {
+                    window.alert("Please enter your password.");
+                    password.focus();
+                    return false;
+                } else {
+                    return true;
+                }
+
             }
                     
     </script>
